@@ -76,6 +76,7 @@
 
 - Perform a search and select the desired book from the search results.
 - Press `Cmd + Enter` to initiate the download.
+- When the download is complete, Alfred will display a notification.
 - The book will be downloaded to your `Downloads` folder.
   - ⚠️ **Note**: The download feature currently supports books with the `/lgli` source.
 

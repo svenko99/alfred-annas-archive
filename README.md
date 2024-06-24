@@ -2,7 +2,7 @@
 
 ## 👋 Introduction
 
-- This [Alfred](https://www.alfredapp.com/) workflow allows you to search for and download books from [Anna's Archive](https://annas-archive.org/).
+- This [Alfred](https://www.alfredapp.com/) workflow allows you to search for and download books from [Anna's Archive](https://annas-archive.org/). Anna's Archive is a search engine for [shadow libraries](https://en.wikipedia.org/wiki/Shadow_library).
 
 ## 🌟 Features
 

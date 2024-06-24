@@ -21,6 +21,7 @@
 
 <details>
 <summary><strong>Optional custom subtitle</strong>: Customize the subtitle format for search results. Default format is <code>{0} | {1} | {2} | {3} | {4} | {5}</code> where each placeholder corresponds to a specific book attribute.</summary>
+</br>
 <ul>
     <li> {0}: Authors</li>
     <li> {1}: Book language</li>
@@ -53,6 +54,7 @@
 
 <details>
 <summary><strong>Optional language filter</strong>: Specify the languages to filter search results. Default is all languages.</summary>
+</br>
 <ul>
     <li>
         The language filter is a comma-separated list of language codes. For example, to filter search results to English and Russian books, set the language filter to <code>en,ru</code>.
@@ -79,6 +81,6 @@
 
 ## 🖼️ Images
 
-![](images/image-0.jpg)
-![](images/image-1.jpg)
-![](images/image-2.jpg)
+![](images/image1.png)
+![](images/image2.png)
+![](images/image3.png)

@@ -57,7 +57,7 @@
 </br>
 <ul>
     <li>
-        The language filter is a comma-separated list of language codes. For example, to filter search results to English and Russian books, set the language filter to <code>en,ru</code>.
+        The language filter is a comma-separated list of language codes (<a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1</a>). For example, to filter search results to English and Russian books, set the language filter to <code>en,ru</code>.
     </li>
 </ul>
 </details>

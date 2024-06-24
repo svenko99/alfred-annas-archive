@@ -8,7 +8,7 @@
 
 - **Search Books**: Quickly search for books using keywords.
 - **Customizable Results**: Display search results with customizable subtitles.
-- **Language Filtering**: Filter search results by specified languages by setting the language filter or live when searching.
+- **Language Filtering**: Filter search results by specified languages by setting the language filter variable or live when searching.
 - **Direct Download**: Download books directly from the search results (currently supports downloading books with the `/lgli` source).
 
 ## 🚀 Installation

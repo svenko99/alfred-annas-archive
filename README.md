@@ -2,14 +2,14 @@
 
 ## 👋 Introduction
 
-- This Alfred workflow allows you to search for and download books from Anna's Archive.
+- This [Alfred](https://www.alfredapp.com/) workflow allows you to search for and download books from [Anna's Archive](https://annas-archive.org/).
 
 ## 🌟 Features
 
-- Search Books: Quickly search for books using keywords.
-- Customizable Results: Display search results with customizable subtitles.
-- Language Filtering: Filter search results by specified languages by setting the language filter or live.
-- Direct Download: Download books directly from the search results (currently supports downloading books with the `/lgli` source).
+- **Search Books**: Quickly search for books using keywords.
+- **Customizable Results**: Display search results with customizable subtitles.
+- **Language Filtering**: Filter search results by specified languages by setting the language filter or live when searching.
+- **Direct Download**: Download books directly from the search results (currently supports downloading books with the `/lgli` source).
 
 ## 🚀 Installation
 

@@ -59,7 +59,15 @@ def parse_sub_results(sub_results_text):
 
 def create_url(query, page=1, langs=None):
     lang_params = (
-        "".join([f"&lang={lang.strip()}" for lang in langs.split(",")]) if langs else ""
+        "".join(
+            [
+                f"&lang={lang.strip()}"
+                for lang in langs.split(",")
+                if lang.strip() in AVAILABLE_LANGUAGES
+            ]
+        )
+        if langs
+        else ""
     )
     # check if the first word of the query is a language code
     live_lang_param = query.split(" ")[0]

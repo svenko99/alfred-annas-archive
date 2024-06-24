@@ -13,7 +13,7 @@
 
 ## 🚀 Installation
 
-1. Download the Workflow: Obtain the Alfred workflow file from the repository.
+1. Download the Workflow: Obtain the Alfred workflow file from the repository ([⤓ here](https://github.com/svenko99/alfred-annas-archive/releases/latest/Anna.s.Archive.alfredworkflow)).
 2. Install the Workflow: Double-click the downloaded workflow file to install it in Alfred.
 3. Set Up Environment Variables: Optionally, configure the environment variables in Alfred for customized behavior.
 

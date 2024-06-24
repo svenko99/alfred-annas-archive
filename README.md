@@ -66,7 +66,7 @@
 
 #### Basic Search
 
-- Type the keyword for the workflow followed by your search query, e.g., `anna Madame Bovary`.
+- Type the keyword for the workflow followed by your search query, e.g., `anna Madame Bovary` or `anna Gustave Flaubert`.
 
 #### Live Language-Specific Search
 

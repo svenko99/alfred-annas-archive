@@ -1,23 +1,23 @@
 # Anna's Archive Workflow for Alfred
 
-## Introduction
+## 👋 Introduction
 
 - This Alfred workflow allows you to search for and download books from Anna's Archive.
 
-## Features
+## 🌟 Features
 
 - Search Books: Quickly search for books using keywords.
 - Customizable Results: Display search results with customizable subtitles.
 - Language Filtering: Filter search results by specified languages by setting the language filter or live.
 - Direct Download: Download books directly from the search results (currently supports downloading books with the `/lgli` source).
 
-## Installation
+## 🚀 Installation
 
 1. Download the Workflow: Obtain the Alfred workflow file from the repository.
 2. Install the Workflow: Double-click the downloaded workflow file to install it in Alfred.
 3. Set Up Environment Variables: Optionally, configure the environment variables in Alfred for customized behavior.
 
-## Workflow variables
+## 🔧 Workflow variables
 
 <details>
 <summary><strong>Optional custom subtitle</strong>: Customize the subtitle format for search results. Default format is <code>{0} | {1} | {2} | {3} | {4} | {5}</code> where each placeholder corresponds to a specific book attribute.</summary>
@@ -60,7 +60,7 @@
 </ul>
 </details>
 
-## Usage examples
+## 💡 Usage examples
 
 #### Basic Search
 
@@ -77,4 +77,8 @@
 - The book will be downloaded to your `Downloads` folder.
   - ⚠️ **Note**: The download feature currently supports books with the `/lgli` source.
 
-## Images
+## 🖼️ Images
+
+![](images/image-0.jpg)
+![](images/image-1.jpg)
+![](images/image-2.jpg)

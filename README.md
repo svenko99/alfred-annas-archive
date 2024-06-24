@@ -68,9 +68,10 @@
 
 - Type the keyword for the workflow followed by your search query, e.g., `anna Madame Bovary`.
 
-#### Live language-Specific Search
+#### Live Language-Specific Search
 
 - Type the keyword for the workflow followed by a language code and your search query, e.g., `anna en Madame Bovary` or `anna de Madame Bovary`.
+  - ⚠️ **Clarification**: There are two options for language filters. When you specify languages in the workflow variable, you don't need to use live language codes.
 
 #### Downloading a Book
 

@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import json
 import sys
 import os
+import re
+
 
 KEYWORD = sys.argv[1]
 CUSTOM_SUBTITLE = os.getenv("CUSTOM_SUBTITLE", "{0} | {1} | {2} | {3} | {4} | {5}")
@@ -36,23 +38,45 @@ def create_custom_subtitle(subtitle_format, variables, result):
 
 
 def parse_sub_results(sub_results_text):
-    parts = sub_results_text.split(",")
-    if "[" in parts[0] and "]" in parts[0]:
-        # The first element is the language
-        book_lang = parts[0].strip()
+    # Split by commas and strip whitespace from each part
+    parts = [part.strip() for part in sub_results_text.split(",")]
+
+    # Regular expression to detect language tags in the format "[xx]"
+    lang_pattern = re.compile(r"\[[a-z]{2}\]")
+
+    # Initialize variables with default values
+    book_lang = "Unknown Language"
+    book_filetype = "Unknown Filetype"
+    book_source = "Unknown Source"
+    book_size = "Unknown Size"
+    book_content = "Unknown Content"
+
+    # Check if language information is present in parts[0] and parts[1]
+    if (
+        len(parts) > 1
+        and lang_pattern.search(parts[0])
+        and lang_pattern.search(parts[1])
+    ):
+        # Combine the first two parts as the language information
+        book_lang = f"{parts[0]}, {parts[1]}"
+        other_parts = parts[2:]
+    elif lang_pattern.search(parts[0]):
+        # Language is only in parts[0]
+        book_lang = parts[0]
         other_parts = parts[1:]
     else:
-        # No language provided
-        book_lang = "Unknown Language"
+        # No language information detected, start parsing from the beginning
         other_parts = parts
 
-    # Extract remaining parts
-    book_filetype = (
-        other_parts[0].strip() if len(other_parts) > 0 else "Unknown Filetype"
-    )
-    book_source = other_parts[1].strip() if len(other_parts) > 1 else "Unknown Source"
-    book_size = other_parts[2].strip() if len(other_parts) > 2 else "Unknown Size"
-    book_content = other_parts[3].strip() if len(other_parts) > 3 else "Unknown Content"
+    # Assign the remaining fields if available
+    if len(other_parts) > 0:
+        book_filetype = other_parts[0]
+    if len(other_parts) > 1:
+        book_source = other_parts[1]
+    if len(other_parts) > 2:
+        book_size = other_parts[2]
+    if len(other_parts) > 3:
+        book_content = other_parts[3]
 
     return book_lang, book_filetype, book_source, book_size, book_content
 
@@ -87,7 +111,7 @@ def get_search_results(url):
     for result in results:
         # Find all divs with class "h-[125] flex flex-col justify-center" inside div with class "mb-4"
         h125_divs = result.find_all(
-            "div", class_="h-[125] flex flex-col justify-center"
+            "div", class_="h-[125px] flex flex-col justify-center"
         )
 
         for h125_div in h125_divs:

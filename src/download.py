@@ -2,7 +2,21 @@ import requests
 from bs4 import BeautifulSoup
 import sys
 from pathlib import Path
+import re
 
+def clean_filename(filename):
+    # Remove or replace characters that are illegal in macOS filenames
+    illegal_chars = r'[/\\?%*:|"<>]'
+    cleaned_name = re.sub(illegal_chars, '_', filename)
+    
+    # Remove leading/trailing spaces and periods
+    cleaned_name = cleaned_name.strip('. ')
+    
+    # Ensure the filename is not empty
+    if not cleaned_name:
+        cleaned_name = '_'
+    
+    return cleaned_name
 
 def resolve_libgen_download_link(md5, title, filetype):
     link = f"http://libgen.li/ads.php?md5={md5}"
@@ -15,6 +29,7 @@ def resolve_libgen_download_link(md5, title, filetype):
     )
     if response.status_code == 200:
         download_path = str(Path.home() / "Downloads")
+        title = clean_filename(title)  # Clean the title
         with open(f"{download_path}/{title}{filetype}", "wb") as f:
             f.write(requests.get(download_link, allow_redirects=True).content)
         return f"Downloaded {title}{filetype}"

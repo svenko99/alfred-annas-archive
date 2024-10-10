@@ -9,6 +9,7 @@ import re
 KEYWORD = sys.argv[1]
 CUSTOM_SUBTITLE = os.getenv("CUSTOM_SUBTITLE", "{0} | {1} | {2} | {3} | {4} | {5}")
 LANGUAGES = os.getenv("LANGUAGES", None)  # Comma-separated list of languages
+SOURCE_FILTER = bool(int(os.getenv("SOURCE_FILTER"), 0))
 CUSTOM_SUBTITLE_VARIABLES = {
     "{0}": "authors",
     "{1}": "book_lang",
@@ -72,7 +73,7 @@ def parse_sub_results(sub_results_text):
     if len(other_parts) > 0:
         book_filetype = other_parts[0]
     if len(other_parts) > 1:
-        book_source = re.sub(u'\U0001F680', '', other_parts[1])   # Remove the rocket emoji (U+1F680) 
+        book_source = other_parts[1]
     if len(other_parts) > 2:
         book_size = other_parts[2]
     if len(other_parts) > 3:
@@ -185,14 +186,14 @@ def create_alfred_item(
     }
 
 
-def main(query, page=1, langs=None):
-    url = create_url(query, page, langs)
-    results = get_search_results(url)
+def build_alfred_results(url, results):
     alfred_items = []
     if results:
         for result in results:
-            # Check if 'book_source' starts with '/lgli'
-            if result['book_source'].startswith('/lgli'):
+            # Remove the rocket emoji (U+1F680)
+            book_source = re.sub(u'\U0001F680', '', result['book_source'])
+            # Filter out non-Libgen sources only if SOURCE_FILTER=True 
+            if not SOURCE_FILTER or book_source.startswith('/lgli'):
                 custom_subtitle = create_custom_subtitle(
                     CUSTOM_SUBTITLE, CUSTOM_SUBTITLE_VARIABLES, result
                 )
@@ -217,6 +218,11 @@ def main(query, page=1, langs=None):
 
     print(output_results(alfred_items))
 
+
+def main(query, page=1, langs=None):
+    url = create_url(query, page, langs)
+    results = get_search_results(url)
+    build_alfred_results(url, results)
 
 if __name__ == "__main__":
     main(KEYWORD, langs=LANGUAGES)

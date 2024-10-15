@@ -63,7 +63,7 @@
 </details>
 
 <details>
-<summary><strong>Optional show only Libgen sources</strong>: Check to enable filtering out of non-Libgen sources from search results. Default is off.</summary>
+<summary><strong>Optional Libgen source filter</strong>: Check to enable filtering out of non-Libgen sources from search results. Default is off.</summary>
 </details>
 
 ## 💡 Usage examples

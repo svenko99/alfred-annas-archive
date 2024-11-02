@@ -110,9 +110,9 @@ def get_search_results(url):
     search_results = []
 
     for result in results:
-        # Find all divs with class "h-[125] flex flex-col justify-center" inside div with class "mb-4"
+        # Find all divs with class "h-[110px] flex flex-col justify-center" inside div with class "mb-4"
         h125_divs = result.find_all(
-            "div", class_="h-[125px] flex flex-col justify-center"
+            "div", class_="h-[110px] flex flex-col justify-center"
         )
 
         for h125_div in h125_divs:

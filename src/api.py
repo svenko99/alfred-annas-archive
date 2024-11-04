@@ -83,22 +83,25 @@ def parse_sub_results(sub_results_text):
 
 
 def create_url(query, page=1, langs=None):
-    lang_params = (
-        "".join(
-            [
-                f"&lang={lang.strip()}"
-                for lang in langs.split(",")
-                if lang.strip() in AVAILABLE_LANGUAGES
-            ]
-        )
-        if langs
-        else ""
-    )
-    # check if the first word of the query is a language code
-    live_lang_param = query.split(" ")[0]
+    # Check if the first word of the query is a language code
+    query_parts = query.split(" ")
+    live_lang_param = query_parts[0]
+    
     if live_lang_param in AVAILABLE_LANGUAGES and len(live_lang_param) <= 3:
         lang_params = f"&lang={live_lang_param}"
-        query = " ".join(query.split(" ")[1:])
+        query = " ".join(query_parts[1:])
+    else:
+        # Generate lang_params from provided langs
+        lang_params = (
+            "".join(
+                [
+                    f"&lang={lang.strip()}"
+                    for lang in langs.split(",")
+                    if lang.strip() in AVAILABLE_LANGUAGES
+                ]
+            ) if langs else ""
+        )
+    
     return f"https://annas-archive.org/search?index=&page={page}&q={query}&sort={lang_params}"
 
 

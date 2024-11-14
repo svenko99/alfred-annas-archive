@@ -10,6 +10,7 @@ KEYWORD = sys.argv[1]
 CUSTOM_SUBTITLE = os.getenv("CUSTOM_SUBTITLE", "{0} | {1} | {2} | {3} | {4} | {5}")
 LANGUAGES = os.getenv("LANGUAGES", None)  # Comma-separated list of languages
 SOURCE_FILTER = bool(int(os.getenv("SOURCE_FILTER"), 0))
+ORDER_BY = os.getenv("ORDER_BY", "")
 CUSTOM_SUBTITLE_VARIABLES = {
     "{0}": "authors",
     "{1}": "book_lang",
@@ -82,24 +83,27 @@ def parse_sub_results(sub_results_text):
     return book_lang, book_filetype, book_source, book_size, book_content
 
 
-def create_url(query, page=1, langs=None):
-    lang_params = (
-        "".join(
-            [
-                f"&lang={lang.strip()}"
-                for lang in langs.split(",")
-                if lang.strip() in AVAILABLE_LANGUAGES
-            ]
-        )
-        if langs
-        else ""
-    )
-    # check if the first word of the query is a language code
-    live_lang_param = query.split(" ")[0]
+def create_url(query, page=1, order_by="", langs=None):
+    # Check if the first word of the query is a language code
+    query_parts = query.split(" ")
+    live_lang_param = query_parts[0]
+    
     if live_lang_param in AVAILABLE_LANGUAGES and len(live_lang_param) <= 3:
         lang_params = f"&lang={live_lang_param}"
-        query = " ".join(query.split(" ")[1:])
-    return f"https://annas-archive.org/search?index=&page={page}&q={query}&sort={lang_params}"
+        query = " ".join(query_parts[1:])
+    else:
+        # Generate lang_params from provided langs
+        lang_params = (
+            "".join(
+                [
+                    f"&lang={lang.strip()}"
+                    for lang in langs.split(",")
+                    if lang.strip() in AVAILABLE_LANGUAGES
+                ]
+            ) if langs else ""
+        )
+    
+    return f"https://annas-archive.org/search?index=&page={page}&q={query}&sort={order_by}{lang_params}"
 
 
 def get_search_results(url):
@@ -219,10 +223,10 @@ def build_alfred_results(url, results):
     print(output_results(alfred_items))
 
 
-def main(query, page=1, langs=None):
-    url = create_url(query, page, langs)
+def main(query, page=1, order_by="", langs=None):
+    url = create_url(query, page, order_by, langs)
     results = get_search_results(url)
     build_alfred_results(url, results)
 
 if __name__ == "__main__":
-    main(KEYWORD, langs=LANGUAGES)
+    main(KEYWORD, order_by=ORDER_BY, langs=LANGUAGES)

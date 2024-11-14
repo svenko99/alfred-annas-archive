@@ -66,6 +66,10 @@
 <summary><strong>Optional Libgen source filter</strong>: Check to enable filtering out of non-Libgen sources from search results. Default is off.</summary>
 </details>
 
+<details>
+<summary><strong>Optional order by</strong>: Select what order the results should be sorted with. Default is order by "Most relevant".</summary>
+</details>
+
 ## 💡 Usage examples
 
 #### Basic Search

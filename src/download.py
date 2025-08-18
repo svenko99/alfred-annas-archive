@@ -5,6 +5,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
+
 def clean_filename(filename):
     # Remove or replace characters that are illegal in macOS filenames
     illegal_chars = r'[/\\?%*:|"<>]'
@@ -19,15 +20,19 @@ def clean_filename(filename):
 
     return cleaned_name
 
+
 def resolve_libgen_download_link(md5, title, filetype):
     link = f"http://libgen.li/ads.php?md5={md5}"
     response = requests.get(link)
     soup = BeautifulSoup(response.text, "html.parser")
     download_link = soup.find_all("a")
+
+    # Extract a valid download link
     download_link = (
-        "http://libgen.li/"
-        + [link["href"] for link in download_link if "get.php" in link["href"]][0]
+            "http://libgen.li/"
+            + [link["href"] for link in download_link if "get.php" in link["href"]][0]
     )
+
     if response.status_code == 200:
         download_path = str(Path.home() / "Downloads")
 
@@ -37,16 +42,16 @@ def resolve_libgen_download_link(md5, title, filetype):
         # Create filename and path and check for file conflicts
         base_filename = f"{title}{filetype}"
         full_path = os.path.join(download_path, base_filename)
-        counter = 1    
+        counter = 1
         while os.path.exists(full_path):
             base_filename = f"{title}_{counter}{filetype}"
             full_path = os.path.join(download_path, base_filename)
             counter += 1
-        
+
         # Download and save the file
         with open(full_path, "wb") as f:
             f.write(requests.get(download_link, allow_redirects=True).content)
-        
+
         return f"Downloaded {base_filename}"
 
 

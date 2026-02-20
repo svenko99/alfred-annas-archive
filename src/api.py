@@ -106,7 +106,7 @@ def create_url(query, page=1, order_by="", langs=None):
             else ""
         )
 
-    return f"https://annas-archive.org/search?index=&page={page}&q={query}&sort={order_by}{lang_params}"
+    return f"https://annas-archive.li/search?index=&page={page}&q={query}&sort={order_by}{lang_params}"
 
 
 def get_search_results(url):
